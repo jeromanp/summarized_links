@@ -24,7 +24,7 @@ export default function Hero() {
       </nav>
       <h1 className="mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">
         Resume artículos con <br className="max-md:hidden" />
-        <span className="bg-gradient-to-r from-amber-500 via-red-600 to-yellow-500 bg-clip-text text-transparent">OpenAI GPT-4</span>
+        <span className="bg-gradient-to-r from-green-500 via-blue-600 to-green-500 bg-clip-text text-transparent">OpenAI GPT-4</span>
       </h1>
       <h2 className="mt-5 text-lg text-gray-600 sm:text-xl text-center max-w-2xl">
         Resume el contenido de cualquier página web con esta herramienta de
