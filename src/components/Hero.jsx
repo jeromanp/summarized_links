@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <header className="w-full flex justify-center items-center flex-col">
       <nav className="flex justify-between items-center w-full mb-10 pt-3">
-        <img src="/assets/logo.svg" alt="Logo" className="w-28 object-contain" />
+        <img src="/assets/logo.PNG" alt="Logo" className="w-28 object-contain" />
 
         <a
           href="https://www.github.com/jeromanp"
