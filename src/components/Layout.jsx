@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
           name="description"
           content="Resume el contenido de cualquier página web con esta aplicación, que con ayuda de la Inteligencia Artíficial hará tu lecturas más efectiva."
         ></meta>
-        <link rel="icon" href="/imagen/logo.png" />
+        <link rel="icon" href="/assets/logo.png" />
         <meta name="author" content="Jose Eduardo Roman Piña" />
       </Head>
       <main className="w-full">{children}</main>
