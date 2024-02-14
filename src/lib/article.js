@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const rapidApiKey = process.env.RAPID_API_KEY;
-// const rapidApiKey = "db422d8693msh8c6f0e70d49e608p1deef0jsn44c1436fa426";
 
 console.log(rapidApiKey);
 
