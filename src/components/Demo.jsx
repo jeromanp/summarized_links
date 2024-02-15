@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useLazyGetSummaryQuery } from "@/lib/article.js";
+import { useLazyGetSummaryQuery } from "../services/article";
 
 const Demo = () => {
   const [article, setArticle] = useState({
@@ -32,24 +32,31 @@ const Demo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const existingArticle = allArticles.find(
       (item) => item.url === article.url
     );
-
+  
     if (existingArticle) return setArticle(existingArticle);
-
-    const { data } = await getSummary({ articleUrl: article.url });
-    if (data?.summary) {
-      const newArticle = { ...article, summary: data.summary };
-      const updatedAllArticles = [newArticle, ...allArticles];
-
-      // update state and local storage
-      setArticle(newArticle);
-      setAllArticles(updatedAllArticles);
-      localStorage.setItem("articles", JSON.stringify(updatedAllArticles));
+  
+    try {
+      // Iniciar la solicitud y esperar a que se complete
+      const { data } = await getSummary({ articleUrl: article.url });
+    
+      if (data?.summary) {
+        const newArticle = { ...article, summary: data.summary };
+        const updatedAllArticles = [newArticle, ...allArticles];
+  
+        // Actualizar el estado y el almacenamiento local
+        setArticle(newArticle);
+        setAllArticles(updatedAllArticles);
+        localStorage.setItem("articles", JSON.stringify(updatedAllArticles));
+      }
+    } catch (error) {
+      console.error("Error al obtener el resumen:", error);
     }
   };
+  
 
   // copy the url and toggle the icon for user feedback
   const handleCopy = (copyUrl) => {
@@ -69,6 +76,7 @@ const Demo = () => {
       {/* Search */}
       <div className="flex flex-col w-full gap-2">
         <form
+        
           onSubmit={handleSubmit}
           className="relative lex justify-center items-center"
         >
@@ -92,25 +100,23 @@ const Demo = () => {
             className="block w-full rounded-md border border-gray-200 bg-white py-2.5 pl-10 pr-12 text-sm shadow-lg font-satoshi font-medium focus:border-black focus:outline-none focus:ring-0 peer"
           />
           <div>
-            
-          <button
-            type="submit"
-            className="hover:border-gray-700 hover:text-gray-700 absolute inset-y-0 right-0 my-1.5 mr-1.5 flex w-10 items-center justify-center rounded border border-gray-200 font-sans text-sm font-medium text-gray-400  peer-focus:border-gray-700 peer-focus:text-gray-700 "
-          >
-            <p>OK</p>
-          </button>
-          
+            <button
+              type="submit"
+              className="hover:border-gray-700 hover:text-gray-700 absolute inset-y-0 right-0 my-1.5 mr-1.5 flex w-10 items-center justify-center rounded border border-gray-200 font-sans text-sm font-medium text-gray-400  peer-focus:border-gray-700 peer-focus:text-gray-700 "
+            >
+              <p>OK</p>
+            </button>
           </div>
         </form>
 
         {/* Browse URL History */}
         <div className="flex flex-col gap-1 max-h-60 overflow-y-auto">
           <div>
-          <h2 className="font-satoshi font-bold text-gray-600 text-xl pb-5">
-                <span className="font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                  Historial:
-                </span>
-              </h2>
+            <h2 className="font-satoshi font-bold text-gray-600 text-xl pb-5">
+              <span className="font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                Historial:
+              </span>
+            </h2>
           </div>
           {allArticles.reverse().map((item, index) => (
             <div
@@ -138,7 +144,7 @@ const Demo = () => {
             </div>
           ))}
         </div>
-        <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"/>
+        <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
       </div>
 
       {/* Display Results */}
@@ -180,6 +186,11 @@ const Demo = () => {
                     ))}
                   </div>
                 </div>
+              </div>
+              <div className="">
+                <a href="#inicio">
+                  <button className="animate-pulse">🔼</button>
+                </a>
               </div>
             </div>
           )
