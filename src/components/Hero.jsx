@@ -4,7 +4,7 @@ import React from "react";
 export default function Hero() {
   return (
     <header className="w-full flex justify-center items-center flex-col">
-      <nav className="flex justify-between items-center w-full mb-10 pt-3">
+      <nav className="flex justify-between items-center w-full mb-10 pt-3" id="inicio">
         <img src="/assets/logo.PNG" alt="Logo" className="w-28 object-contain" />
 
         <a
