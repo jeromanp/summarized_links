@@ -32,21 +32,21 @@ const Demo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const existingArticle = allArticles.find(
       (item) => item.url === article.url
     );
-  
+
     if (existingArticle) return setArticle(existingArticle);
-  
+
     try {
       // Iniciar la solicitud y esperar a que se complete
       const { data } = await getSummary({ articleUrl: article.url });
-    
+
       if (data?.summary) {
         const newArticle = { ...article, summary: data.summary };
         const updatedAllArticles = [newArticle, ...allArticles];
-  
+
         // Actualizar el estado y el almacenamiento local
         setArticle(newArticle);
         setAllArticles(updatedAllArticles);
@@ -56,7 +56,6 @@ const Demo = () => {
       console.error("Error al obtener el resumen:", error);
     }
   };
-  
 
   // copy the url and toggle the icon for user feedback
   const handleCopy = (copyUrl) => {
@@ -76,7 +75,6 @@ const Demo = () => {
       {/* Search */}
       <div className="flex flex-col w-full gap-2">
         <form
-        
           onSubmit={handleSubmit}
           className="relative lex justify-center items-center"
         >
@@ -97,14 +95,20 @@ const Demo = () => {
             }
             onKeyDown={handleKeyDown}
             required
-            className="block w-full rounded-md border border-gray-200 bg-white py-2.5 pl-10 pr-12 text-sm shadow-lg font-satoshi font-medium focus:border-black focus:outline-none focus:ring-0 peer"
+            className="block min-w-[78vh] rounded-md border border-gray-200 bg-white py-2.5 pl-10 pr-12 text-sm shadow-lg font-satoshi font-medium focus:border-black focus:outline-none focus:ring-0 peer"
           />
           <div>
             <button
               type="submit"
-              className="hover:border-gray-700 hover:text-gray-700 absolute inset-y-0 right-0 my-1.5 mr-1.5 flex w-10 items-center justify-center rounded border border-gray-200 font-sans text-sm font-medium text-gray-400  peer-focus:border-gray-700 peer-focus:text-gray-700 "
+              className="hover:border-gray-700 hover:text-gray-700 absolute inset-y-0 right-12 my-1.5 mr-1.5 flex w-10 items-center justify-center rounded border border-gray-200 font-sans text-sm font-medium text-gray-400  peer-focus:border-gray-700 peer-focus:text-gray-700 hover:bg-green-400 "
             >
               <p>OK</p>
+            </button>
+            <button
+              onClick={() => setArticle({ ...article, url: "" })}
+              className="hover:border-gray-700 hover:text-gray-700 absolute inset-y-0 right-0 my-1.5 mr-1.5 flex w-10 items-center justify-center rounded border border-gray-200 font-sans text-sm font-medium text-gray-400  peer-focus:border-gray-700 peer-focus:text-gray-700 hover:bg-red-500"
+            >
+              X
             </button>
           </div>
         </form>
