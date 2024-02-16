@@ -17,7 +17,7 @@ export default function Hero() {
         </Link>
 
         <a
-          href="https://www.github.com/jeromanp"
+          href="https://github.com/jeromanp/summarized_links"
           target="_blank"
           rel="noopener noreferrer"
         >
