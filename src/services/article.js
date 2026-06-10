@@ -17,7 +17,8 @@ export const articleApi = createApi({
         getSummary: builder.query({
             // encodeURIComponent() function encodes special characters that may be present in the parameter values
             // If we do not properly encode these characters, they can be misinterpreted by the server and cause errors or unexpected behavior. Thus that RTK bug
-            query: (params) => `summarize?url=${encodeURIComponent(params.articleUrl)}&length=5&lang=es&html=true`,
+            // query: (params) => `summarize?url=${encodeURIComponent(params.articleUrl)}&length=5&lang=es&html=true`,
+            query: (params) => `summarize?url=${encodeURIComponent(params.articleUrl)}&lang=es&engine=1`,
         }),
     }),
 })
